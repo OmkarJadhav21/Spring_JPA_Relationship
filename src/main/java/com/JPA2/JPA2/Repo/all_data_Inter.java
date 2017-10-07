@@ -9,5 +9,5 @@ import java.util.Map;
 
 public interface all_data_Inter {
 
-    List<Map<String,Object>> booklist();
+    List<Map<String,Object>> booklist(Integer author_id);
 }

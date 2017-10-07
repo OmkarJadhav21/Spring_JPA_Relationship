@@ -8,11 +8,9 @@ import com.JPA2.JPA2.Repo.all_data_Inter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 public class Bk_Controller {
@@ -35,7 +33,7 @@ public class Bk_Controller {
             booksSet.addAll(author.getBooks());
             author.setBooks(booksSet);
             author_inter.save(author);
-            return "data inserted into Author";
+            return "data inserted into Author where id already present";
         }else {
             author_inter.save(author);
             return "data inserted into Author";
@@ -48,16 +46,9 @@ public class Bk_Controller {
         return "Data Deleted from All tables";
     }
 
-//    @GetMapping(value = "/getbyAuthor")
-//    List<Author> getbyAuthor(){
-//       List<Author> list= author_inter.trythis();
-//        return list;
-//    }
-
     @GetMapping(value = "/booklist")
-    List<Map<String,Object>> booksList(){
-    List<Map<String,Object>>li=all_data_inter.booklist();
-
+    List<Map<String,Object>> booksList(@RequestParam Integer author_id ){
+    List<Map<String,Object>>li=all_data_inter.booklist(author_id);
     return li;
     }
 }
