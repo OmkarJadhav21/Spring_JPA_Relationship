@@ -7,6 +7,7 @@ import com.JPA2.JPA2.Repo.Stud_inter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,5 +35,12 @@ public class St_Controller {
                 stud_inter.save(student);
               }
         return "success";
+    }
+
+    @PostMapping(value = "/joinDelete")
+    String delete(@RequestParam Integer dept_id){
+        dept_inter.delete(dept_id);
+        return "Values Deleted from both tables with associated id";
+
     }
 }
