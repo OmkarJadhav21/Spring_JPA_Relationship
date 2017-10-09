@@ -33,7 +33,7 @@ public class Bk_Controller {
             booksSet.addAll(author.getBooks());
             author.setBooks(booksSet);
             author_inter.save(author);
-            return "data inserted into Author where id already present";
+            return "Updated into Author where id already present";
         }else {
             author_inter.save(author);
             return "data inserted into Author";
@@ -50,5 +50,19 @@ public class Bk_Controller {
     List<Map<String,Object>> booksList(@RequestParam Integer author_id ){
     List<Map<String,Object>>li=all_data_inter.booklist(author_id);
     return li;
+    }
+
+    @GetMapping(value = "/data/{author_id}")
+    Author data(@PathVariable Integer author_id){
+        Author at=author_inter.findByAuthorId(author_id);
+        return at;
+    }
+
+    @GetMapping(value = "/AuthorName")
+    Author disapo(@RequestParam Integer id){
+//        Integer aid=at.getAuthorId();
+        Author ingo=author_inter.findOne(id);
+//        String name=ingo.getAuthor_name();
+        return ingo;
     }
 }

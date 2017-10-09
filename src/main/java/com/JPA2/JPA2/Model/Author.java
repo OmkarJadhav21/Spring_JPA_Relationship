@@ -20,7 +20,7 @@ public class Author {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "all_data",joinColumns = @JoinColumn(name = "athr_id",referencedColumnName = "authorId"),inverseJoinColumns = @JoinColumn(name = "bk_id",referencedColumnName = "book_id"))
+    @JoinTable(name = "all_data_Impl",joinColumns = @JoinColumn(name = "athr_id",referencedColumnName = "authorId"),inverseJoinColumns = @JoinColumn(name = "bk_id",referencedColumnName = "book_id"))
     Set<Books> books;
 
     public Integer getAuthorId() {
