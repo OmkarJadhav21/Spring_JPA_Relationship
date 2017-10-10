@@ -1,8 +1,9 @@
 package com.JPA2.JPA2.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
-
 @Entity
 public class Author {
 
@@ -19,8 +20,9 @@ public class Author {
                 '}';
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "all_data_Impl",joinColumns = @JoinColumn(name = "athr_id",referencedColumnName = "authorId"),inverseJoinColumns = @JoinColumn(name = "bk_id",referencedColumnName = "book_id"))
+    @JsonIgnore     //when their is json error in postman the addd this notation for this table
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "all_data",joinColumns = @JoinColumn(name = "athr_id",referencedColumnName = "authorId"),inverseJoinColumns = @JoinColumn(name = "bk_id",referencedColumnName = "book_id"))
     Set<Books> books;
 
     public Integer getAuthorId() {

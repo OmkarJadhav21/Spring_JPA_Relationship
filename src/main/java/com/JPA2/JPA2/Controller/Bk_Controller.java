@@ -5,12 +5,18 @@ import com.JPA2.JPA2.Model.Books;
 import com.JPA2.JPA2.Repo.Author_inter;
 import com.JPA2.JPA2.Repo.Book_inter;
 import com.JPA2.JPA2.Repo.all_data_Inter;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class Bk_Controller {
@@ -52,9 +58,9 @@ public class Bk_Controller {
     return li;
     }
 
-    @GetMapping(value = "/data/{author_id}")
-    Author data(@PathVariable Integer author_id){
-        Author at=author_inter.findByAuthorId(author_id);
+    @GetMapping(value = "/data/{id}")
+    Author data(@PathVariable Integer id){
+        Author at=author_inter.findByAuthorId(id);
         return at;
     }
 
@@ -65,4 +71,12 @@ public class Bk_Controller {
 //        String name=ingo.getAuthor_name();
         return ingo;
     }
+
+    @GetMapping(value = "/auIdBookname")
+    Set<Books> auIdBookname(@RequestParam Integer aut_id){
+        Author info=author_inter.findOne(aut_id);
+        Set<Books> bk=info.getBooks();
+        return bk;
+    }
+
 }

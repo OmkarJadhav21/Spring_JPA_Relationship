@@ -19,7 +19,7 @@ public class all_data_Impl implements all_data_Inter {
 
     @Override
     public List<Map<String,Object>> booklist(Integer author_id) {
-        String sql="select book_id,book_name from books c,all_data_Impl b where b.bk_id=c.book_id and athr_id=?";
+        String sql="select book_id,book_name from books c,all_data b where b.bk_id=c.book_id and athr_id=?";
         List<Map<String,Object>>li= jdbcTemplate.queryForList(sql,author_id);
         return li;
     }
